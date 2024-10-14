@@ -4,7 +4,7 @@ test('legislators', async () => {
   const legislators = await scrapeEULegislators()
 
   expect(Array.isArray(legislators)).toBeTruthy()
-  expect(legislators.length).toBe(719) // This number can fluctuate, feel free to update the test if it's the case.
+  expect(legislators.length).toBe(718) // This number can fluctuate, feel free to update the test if it's the case.
 
   const first = legislators[0]
 
