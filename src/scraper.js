@@ -15,18 +15,33 @@ export const scrapeEULegislators = async () => {
   })
 
   const res = $('.erpl_member-list-item', '.erpl_member-list').map((index, element) => {
-    const name = $(element).find('.erpl_title-h4').text()
-    const { lastName } = extractNames(name)
+    const nameElement = $(element).find('.erpl_title-h4')
+    const additionalInfo = $(element).find('.sln-additional-info')
+    const imgElement = $(element).find('.erpl_image-frame span img')
+    const partyGroupElement = $(additionalInfo.get(0))
+    const countryElement = $(additionalInfo.get(1))
+    const urlElement = $(element).find('a')
+
+    console.log(partyGroupElement)
 
 
 
-    return     {
+    //
+    const name = nameElement.text()
+    const { lastName, firstName } = extractNames(name)
+    const partyGroup = partyGroupElement.text()
+    const country = countryElement.text()
+    const image = $(imgElement).attr('src')
+    const url = urlElement.attr('href')
+    const fullUrl = url.concat(`/${firstName.toUpperCase()}_${lastName}/home`)
+
+    return {
       name,
       lastName,
-      partyGroup: 'Name of the party group',
-      country: 'Name of the country they\'re from',
-      url: 'The URL to the MEP biography page',
-      image: 'The URL to the image of the MEP',
+      partyGroup,
+      country,
+      url: fullUrl,
+      image,
     }
   }).get()
 
