@@ -1,4 +1,4 @@
-import { scrapeEULegislators } from '../scraper.js'
+import { scrapeEULegislators } from '../src/scraper.js'
 
 test('legislators', async () => {
   const legislators = await scrapeEULegislators()
